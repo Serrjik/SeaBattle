@@ -1,4 +1,4 @@
 # battle-city-game
 Танчики на JS, канвасе и с ООП.
 
-[Игра]()
+[Игра](https://serrjik.github.io/SeaBattle/)
