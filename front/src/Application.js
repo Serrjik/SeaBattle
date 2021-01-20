@@ -5,6 +5,8 @@
 	значениями - классами сцен.
 */
 class Application {
+	// Соединение с сервером (пользователь).
+	socket =  null
 	// Объект следит за мышью над документом.
 	mouse = null
 
@@ -26,7 +28,10 @@ class Application {
 		// Оппонент игрока (поле с кораблями). Не отображать корабли.
 		const opponent = new BattlefieldView(false)
 
-		Object.assign(this, { mouse, player, opponent })
+		// Соединение с сервером (пользователь).
+		const socket = io()
+
+		Object.assign(this, { mouse, player, opponent, socket })
 
 		// Добавить в точку монтирования игрока поле с кораблями игрока.
 		document.querySelector('[data-side="player"]').append(player.root)
@@ -47,6 +52,48 @@ class Application {
 			// Инициализировать выбранную сцену.
 			scene.init()
 		}
+
+		/*
+			Повесить на соединение обработчик события отправки сообщения
+			о количестве подключенных к серверу пользователей.
+			Функция обработчик принимает количество подключенных пользователей.
+		*/
+		socket.on('playerCount', n => {
+			// Отобразить на странице количество игроков онлайн.
+			document.querySelector('[data-playersCount]').textContent = n
+		})
+
+		/*
+			Повесить на соединение обработчик события
+			двойного подключения игрока.
+		*/
+		socket.on('doubleConnection', () => {
+			alert(
+				'Socket соединение закрыто из-за подключения в другой вкладке.'
+			)
+			// Скрыть содержимое текущей вкладки.
+			document.body.classList.add('hidden')
+		})
+
+		/*
+			Повесить на соединение обработчик события переподключения игрока.
+			Обработчик принимает все корабли игрока.
+		*/
+		socket.on('reconnection', ships => {
+			// Полностью очистить поле игрока.
+			player.clear()
+
+			// Пройти по всем кораблям игрока.
+			for (const { size, direction, x, y } of ships) {
+				// Выбранный корабль игрока.
+				const ship = new ShipView(size, direction)
+				// Добавить выбранный корабль на поле с кораблями игрока.
+				player.addShip(ship, x, y )
+			}
+
+			// Запустить сцену онлайн игры.
+			this.start('online')
+		})
 
 		// Зарегистрировать вызов общего tick'а для всего приложения.
 		requestAnimationFrame(() => this.tick())
@@ -95,9 +142,9 @@ class Application {
 		const scene = this.scenes[sceneName]
 		// Запомнить активной выбранную сцену.
 		this.activeScene = scene
-		/* 
-			Запустить выбранную сцену, 
-			передав ей массив клеток игрового поля игрока без кораблей. 
+		/*
+			Запустить выбранную сцену,
+			передав ей массив клеток игрового поля игрока без кораблей.
 		*/
 		scene.start(...args)
 

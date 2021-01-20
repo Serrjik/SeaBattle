@@ -67,6 +67,13 @@ class PreparationScene extends Scene {
 		const simpleButton = document.querySelector('[data-computer="simple"]')
 		const middleButton = document.querySelector('[data-computer="middle"]')
 		const hardButton = document.querySelector('[data-computer="hard"]')
+		// Кнопка начала игры против случайного игрока.
+		const randomButton = document.querySelector('[data-type="random"]')
+		// Кнопка "Вызвать на бой".
+		const challengeButton = document.querySelector('[data-type="challenge"]')
+		// Кнопка "Принять вызов".
+		const takeChallengeButton =
+			document.querySelector('[data-type="takeChallenge"]')
 
 		// Кнопка "Расставить корабли случайно".
 		const randomizeButton =
@@ -78,32 +85,59 @@ class PreparationScene extends Scene {
 
 		// Повесить обработчик клика по кнопке "Расставить корабли случайно".
 		this.removeEventListeners.push(
-			addEventListener(randomizeButton, 'click', () => this.randomize())
+			addListener(randomizeButton, 'click', () => this.randomize())
 		)
 
 		// Повесить обработчик клика по кнопке "Расставить корабли вручную".
 		this.removeEventListeners.push(
-			addEventListener(manuallyButton, 'click', () => this.manually())
+			addListener(manuallyButton, 'click', () => this.manually())
 		)
 
 		/*
-			Повесить обработчики клика на кнопки начала игры против компьютера
-			и добавить соответствующие им функции, которые эти обработчики
+			Повесить обработчики клика на кнопки начала игры против компьютера,
+			против случайного игрока, "Вызвать на бой" и "Принять вызов" и
+			добавить соответствующие им функции, которые эти обработчики
 			удаляют, в массив функций, которые удаляют обработчики событий.
 		*/
 		this.removeEventListeners.push(
-			addEventListener(simpleButton, 'click', () =>
+			addListener(simpleButton, 'click', () =>
 				this.startComputer('simple'))
 		)
 
 		this.removeEventListeners.push(
-			addEventListener(middleButton, 'click', () =>
+			addListener(middleButton, 'click', () =>
 				this.startComputer('middle'))
 		)
 
 		this.removeEventListeners.push(
-			addEventListener(hardButton, 'click', () =>
+			addListener(hardButton, 'click', () =>
 				this.startComputer('hard'))
+		)
+
+		this.removeEventListeners.push(
+			addListener(randomButton, 'click', () =>
+				// Запустить сцену игры против случайного игрока.
+				this.app.start('online', 'random')
+			)
+		)
+
+		this.removeEventListeners.push(
+			addListener(challengeButton, 'click', () =>
+				// Запустить сцену игры против приглашённого игрока.
+				this.app.start('online', 'challenge')
+			)
+		)
+
+		this.removeEventListeners.push(
+			addListener(takeChallengeButton, 'click', () => {
+				// Ключ партии.
+				const key = prompt('Ключ партии')
+				/*
+					Запустить сцену игры против приглашённого игрока,
+					передав в неё ключ партии.
+				*/
+				this.app.start('online', 'challenge', key)
+			})
 		)
 	}
 
@@ -240,6 +274,13 @@ class PreparationScene extends Scene {
 			document.querySelector('[data-computer="simple"]').disabled = false
 			document.querySelector('[data-computer="middle"]').disabled = false
 			document.querySelector('[data-computer="hard"]').disabled = false
+			// Разблокировать кнопку начала игры против случайного игрока.
+			document.querySelector('[data-type="random"]').disabled = false
+			// Разблокировать кнопку "Вызвать на бой".
+			document.querySelector('[data-type="challenge"]').disabled = false
+			// Разблокировать кнопку "Принять вызов".
+			document.querySelector('[data-type="takeChallenge"]')
+				.disabled = false
 		}
 
 		/*
@@ -247,10 +288,17 @@ class PreparationScene extends Scene {
 			(игрок ещё НЕ завершил расстановку кораблей):
 		*/
 		else {
-			// Разблокировать кнопки начала игры против компьютера.
+			// Заблокировать кнопки начала игры против компьютера.
 			document.querySelector('[data-computer="simple"]').disabled = true
 			document.querySelector('[data-computer="middle"]').disabled = true
 			document.querySelector('[data-computer="hard"]').disabled = true
+			// Заблокировать кнопку начала игры против случайного игрока.
+			document.querySelector('[data-type="random"]').disabled = true
+			// Заблокировать кнопку "Вызвать на бой".
+			document.querySelector('[data-type="challenge"]').disabled = true
+			// Заблокировать кнопку "Принять вызов".
+			document.querySelector('[data-type="takeChallenge"]')
+				.disabled = true
 		}
 	}
 

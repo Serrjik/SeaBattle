@@ -30,7 +30,7 @@ function isUnderPoint (point, element) {
 	передаёт аргументы в этот обработчик и возвращает функцию,
 	которая этот обработчик события снимает.
 */
-function addEventListener (element, ...args) {
+function addListener (element, ...args) {
 	element.addEventListener(...args)
 	return () => element.removeEventListener(...args)
 }

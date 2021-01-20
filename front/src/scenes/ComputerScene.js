@@ -54,16 +54,20 @@ class ComputerScene extends Scene {
 		againButton.classList.add('hidden')
 
 		// Повесить обработчик клика по кнопке "Сдаться".
-		this.removeEventListeners.push(addEventListener(gaveupButton, 'click', () => {
-			// Запустить сцену подготовки к игре.
-			this.app.start('preparation')
-		}))
+		this.removeEventListeners.push(
+			addListener(gaveupButton, 'click', () => {
+				// Запустить сцену подготовки к игре.
+				this.app.start('preparation')
+			})
+		)
 
 		// Повесить обработчик клика по кнопке "Играть ещё раз".
-		this.removeEventListeners.push(addEventListener(againButton, 'click', () => {
-			// Запустить сцену подготовки к игре.
-			this.app.start('preparation')
-		}))
+		this.removeEventListeners.push(
+			addListener(againButton, 'click', () => {
+				// Запустить сцену подготовки к игре.
+				this.app.start('preparation')
+			})
+		)
 	}
 
 	// Метод останавливает сцену.

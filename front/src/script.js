@@ -2,15 +2,19 @@
 const app = new Application({
 	preparation: PreparationScene,
 	computer: ComputerScene,
+	online: OnlineScene,
 })
 
 // Запустить сцену 'preparation'.
 app.start('preparation')
-
 // console.log('app: ', app);
 
-// // Сгенерировать нажатие на кнопку "Расставить корабли случайно".
+// Сгенерировать нажатие на кнопку "Расставить корабли случайно".
 // document.querySelector('[data-action="randomize"]').click()
+
+// Сгенерировать нажатие на кнопку "Играть против случайного игрока".
+// document.querySelector('[data-type="random"]').disabled = false
+// document.querySelector('[data-type="random"]').click()
 
 // // Сгенерировать нажатие на кнопку "Играть против сильного".
 // document.querySelector('[data-computer="hard"]').disabled = false
