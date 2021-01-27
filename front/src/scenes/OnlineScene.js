@@ -230,7 +230,7 @@ class OnlineScene extends Scene {
 			addListener(gaveupButton, 'click', () => {
 				// Add an entry to the browser's session history stack.
 				console.log('Add an entry to the browsers session history stack.')
-				history.pushState(null, null, window.origin)
+				history.replaceState(null, null, window.origin)
 
 				// Соединение генерирует событие "Сдаться".
 				socket.emit('gaveup')
@@ -266,7 +266,7 @@ class OnlineScene extends Scene {
 	stop () {
 		// Add an entry to the browser's session history stack.
 		console.log('Add an entry to the browsers session history stack.')
-		history.pushState(null, null, window.origin)
+		history.replaceState(null, null, window.origin)
 
 		// Пройти по всем функциям, которые удаляют обработчики событий.
 		for (const removeEventListener of this.removeEventListeners) {
