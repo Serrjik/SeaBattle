@@ -132,11 +132,14 @@ class PreparationScene extends Scene {
 			addListener(takeChallengeButton, 'click', () => {
 				// Ключ партии.
 				const key = prompt('Ключ партии')
-				/*
-					Запустить сцену игры против приглашённого игрока,
-					передав в неё ключ партии.
-				*/
-				this.app.start('online', 'challenge', key)
+				// Если ключ партии ввели:
+				if (key !== null && key.trim()) {
+					/*
+						Запустить сцену игры против приглашённого игрока,
+						передав в неё ключ партии.
+					*/
+					this.app.start('online', 'challenge', key)
+				}
 			})
 		)
 	}

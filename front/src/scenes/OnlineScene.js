@@ -26,6 +26,10 @@ class OnlineScene extends Scene {
 			this.status = status
 			// Отобразить статус игры.
 			this.statusUpdate()
+
+			// // Add an entry to the browser's session history stack.
+			// console.log('Add an entry to the browsers session history stack.')
+			// history.pushState(null, null, '')
 		})
 
 		/*
@@ -113,12 +117,13 @@ class OnlineScene extends Scene {
 			бой. Обработчик принимает ключ игрока.
 		*/
 		socket.on('challengeOpponent', key => {
+			console.log('key: ', key);
 			// Add an entry to the browser's session history stack.
 			history.pushState(null, null, `/${key}`)
 			alert(
-				`Первый кто пройдёт по этой ссылке будет играть с вами:\n${location.href}`
+				'Первый кто пройдёт по этой ссылке будет играть с вами:\n' +
+				`${location.href}`
 			)
-
 		})
 
 		// Отобразить статус игры.
@@ -130,6 +135,7 @@ class OnlineScene extends Scene {
 		против какого соперника будет игра, и ключ партии игры.
 	*/
 	start (variant, key = '') {
+		console.log('variant:', variant, 'key: ', key);
 		// Соединение с сервером (пользователь), игрок.
 		const { socket, player } = this.app
 
@@ -222,6 +228,10 @@ class OnlineScene extends Scene {
 		// Повесить обработчик клика по кнопке "Сдаться".
 		this.removeEventListeners.push(
 			addListener(gaveupButton, 'click', () => {
+				// Add an entry to the browser's session history stack.
+				console.log('Add an entry to the browsers session history stack.')
+				history.pushState(null, null, window.origin)
+
 				// Соединение генерирует событие "Сдаться".
 				socket.emit('gaveup')
 				// Запустить сцену подготовки к игре.
@@ -254,6 +264,10 @@ class OnlineScene extends Scene {
 
 	// Метод останавливает сцену.
 	stop () {
+		// Add an entry to the browser's session history stack.
+		console.log('Add an entry to the browsers session history stack.')
+		history.pushState(null, null, window.origin)
+
 		// Пройти по всем функциям, которые удаляют обработчики событий.
 		for (const removeEventListener of this.removeEventListeners) {
 			// Вызвать выбранную функцию удаления обработчика события.
