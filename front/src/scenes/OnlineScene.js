@@ -26,10 +26,6 @@ class OnlineScene extends Scene {
 			this.status = status
 			// Отобразить статус игры.
 			this.statusUpdate()
-
-			// // Add an entry to the browser's session history stack.
-			// console.log('Add an entry to the browsers session history stack.')
-			// history.pushState(null, null, '')
 		})
 
 		/*
@@ -117,7 +113,6 @@ class OnlineScene extends Scene {
 			бой. Обработчик принимает ключ игрока.
 		*/
 		socket.on('challengeOpponent', key => {
-			console.log('key: ', key);
 			// Add an entry to the browser's session history stack.
 			history.pushState(null, null, `/${key}`)
 			alert(
@@ -162,7 +157,16 @@ class OnlineScene extends Scene {
 				Сгенерировать событие начала вызова игрока на бой
 				и передать в обработчик ключ партии игры.
 			*/
-			socket.emit('challengeOpponent', key)
+			socket.emit('challengeOpponent')
+		}
+
+		// Если нужно принять вызов другого игрока на бой:
+		else if (variant === 'takeChallenge') {
+			/*
+				Сгенерировать событие принятия вызова другого игрока на бой
+				и передать в обработчик ключ партии игры.
+			*/
+			socket.emit('takeChallengeOpponent', key)
 		}
 
 		// Блок с чатом.
@@ -230,7 +234,7 @@ class OnlineScene extends Scene {
 			addListener(gaveupButton, 'click', () => {
 				// Add an entry to the browser's session history stack.
 				console.log('Add an entry to the browsers session history stack.')
-				history.replaceState(null, null, window.origin)
+				history.pushState(null, null, window.origin)
 
 				// Соединение генерирует событие "Сдаться".
 				socket.emit('gaveup')
@@ -266,7 +270,7 @@ class OnlineScene extends Scene {
 	stop () {
 		// Add an entry to the browser's session history stack.
 		console.log('Add an entry to the browsers session history stack.')
-		history.replaceState(null, null, window.origin)
+		history.pushState(null, null, window.origin)
 
 		// Пройти по всем функциям, которые удаляют обработчики событий.
 		for (const removeEventListener of this.removeEventListeners) {

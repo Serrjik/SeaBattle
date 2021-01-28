@@ -138,7 +138,7 @@ class PreparationScene extends Scene {
 						Запустить сцену игры против приглашённого игрока,
 						передав в неё ключ партии.
 					*/
-					this.app.start('online', 'challenge', key)
+					this.app.start('online', 'takeChallenge', key)
 				}
 			})
 		)
