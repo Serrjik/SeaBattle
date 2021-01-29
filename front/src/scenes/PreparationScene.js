@@ -128,6 +128,7 @@ class PreparationScene extends Scene {
 			)
 		)
 
+		// Повесить обработчик клика на кнопку "Принять вызов".
 		this.removeEventListeners.push(
 			addListener(takeChallengeButton, 'click', () => {
 				// Ключ партии.

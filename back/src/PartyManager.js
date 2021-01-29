@@ -238,8 +238,6 @@ module.exports = class PartyManager {
 				ключом партии, значит, нашли второго игрока для партии:
 			*/
 			if (this.waitingChallenge.has(key)) {
-				console.log('ключ партии валидный!')
-
 				// Второй игрок для партии игры.
 				const opponent = this.waitingChallenge.get(key)
 				// Второй игрок исключается из ожидающих вызова на бой.

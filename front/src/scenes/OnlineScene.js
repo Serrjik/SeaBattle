@@ -194,9 +194,6 @@ class OnlineScene extends Scene {
 		const againButton = sceneActionsBar
 			.querySelector('[data-action="again"]')
 
-		// Кнопка "Вызвать на бой".
-		// const challengeButton =
-		// 	document.querySelector('[data-type="challenge"]')
 
 		// Показать кнопку "Сдаться".
 		gaveupButton.classList.remove('hidden')
@@ -232,10 +229,6 @@ class OnlineScene extends Scene {
 		// Повесить обработчик клика по кнопке "Сдаться".
 		this.removeEventListeners.push(
 			addListener(gaveupButton, 'click', () => {
-				// Add an entry to the browser's session history stack.
-				console.log('Add an entry to the browsers session history stack.')
-				history.pushState(null, null, window.origin)
-
 				// Соединение генерирует событие "Сдаться".
 				socket.emit('gaveup')
 				// Запустить сцену подготовки к игре.
@@ -251,17 +244,6 @@ class OnlineScene extends Scene {
 			})
 		)
 
-		// Повесить обработчик клика на кнопку "Вызвать на бой".
-		// this.removeEventListeners.push(
-		// 	addListener(challengeButton, 'click', () =>
-		// 		/*
-		// 			Сгенерировать событие начала вызова игрока на бой
-		// 			и передать в обработчик ключ партии.
-		// 		*/
-		// 		socket.emit('challengeOpponent')
-		// 	)
-		// )
-
 		// Отобразить статус игры.
 		this.statusUpdate()
 	}
@@ -269,7 +251,6 @@ class OnlineScene extends Scene {
 	// Метод останавливает сцену.
 	stop () {
 		// Add an entry to the browser's session history stack.
-		console.log('Add an entry to the browsers session history stack.')
 		history.pushState(null, null, window.origin)
 
 		// Пройти по всем функциям, которые удаляют обработчики событий.
@@ -343,7 +324,8 @@ class OnlineScene extends Scene {
 		// Если игрок проиграл или победил:
 		if (['loser', 'winner'].includes(this.status)) {
 			// Блок подготовки к игре.
-			const sceneActionsBar = document.querySelector('[data-scene="online"]')
+			const sceneActionsBar = document
+				.querySelector('[data-scene="online"]')
 
 			// Кнопка "Сдаться".
 			const gaveupButton = sceneActionsBar
