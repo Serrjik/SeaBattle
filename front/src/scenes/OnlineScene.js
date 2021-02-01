@@ -194,7 +194,6 @@ class OnlineScene extends Scene {
 		const againButton = sceneActionsBar
 			.querySelector('[data-action="again"]')
 
-
 		// Показать кнопку "Сдаться".
 		gaveupButton.classList.remove('hidden')
 		// Скрыть кнопку "Играть ещё раз".
