@@ -1,6 +1,7 @@
 // Зависимости.
 const session = require('express-session')
 const express = require('express')
+// const cookieParser = require('cookie-parser')
 // Встроенная библиотека для работы с файлами.
 const fs = require('fs')
 // Встроенная библиотека для работы с путями.
@@ -33,6 +34,24 @@ const io = require('socket.io')(http)
 */
 const port = 80
 
+// // need cookieParser middleware before we can do anything with cookies
+// app.use(cookieParser())
+
+// // set a cookie
+// app.use(function (req, res, next) {
+// 	// check if client sent cookie
+// 	let cookie = req.cookies.cookieName;
+// 	if (cookie === undefined) {
+// 	  // no: set a new cookie
+// 	  res.cookie('sessionId','cookieValue', { SameSite: 'Strict', signed: true })
+// 	  console.log('cookie created successfully');
+// 	} else {
+// 	  // yes, cookie was already present 
+// 	  console.log('cookie exists', cookie);
+// 	} 
+// 	next(); // <-- important!
+//   })
+
 // Настройка сессий.
 /*
 	Команда session генерирует новый middleware обработчик
@@ -40,7 +59,11 @@ const port = 80
 */
 const sessionMiddleware = session({
 	secret: 's3Cur3',
-	name: 'sessionId'
+	name: 'sessionId',
+	cookie: {
+		sameSite: true,
+		secure: true,
+	},
 })
 
 app.set('trust proxy', 1) // trust first proxy

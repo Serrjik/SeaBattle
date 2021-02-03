@@ -85,6 +85,9 @@ class OnlineScene extends Scene {
 			Обработчик принимает массивы всех выстрелов игрока и его оппонента.
 		*/
 		socket.on('setShots', (ownShots, opponentShots) => {
+			console.log('ownShots: ', ownShots);
+			console.log('opponentShots: ', opponentShots);
+			
 			// Удалить все выстрелы на поле игрока.
 			player.removeAllShots()
 

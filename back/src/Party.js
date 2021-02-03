@@ -208,6 +208,7 @@ module.exports = class Party extends Observer {
 			y: shot.y,
 			variant: shot.variant,
 		}))
+		console.log('player1Shots: ', player1Shots);
 
 		// Массив всех выстрелов 2-го игрока.
 		const player2Shots = this.player2.battlefield.shots.map(shot => ({
@@ -215,6 +216,7 @@ module.exports = class Party extends Observer {
 			y: shot.y,
 			variant: shot.variant,
 		}))
+		console.log('player2Shots: ', player2Shots);
 
 		/*
 			Переданный игрок генерирует событие установки выстрелов.
