@@ -225,7 +225,6 @@ module.exports = class PartyManager {
 			игрока на бой. Обработчик принимает ключ партии.
 		*/
 		socket.on('takeChallengeOpponent', (key = '') => {
-			console.log('ключ партии: ', key)
 			// Если игрок НЕ свободен (уже в партии игры или ждёт игру):
 			if (!isFree) {
 				// Ничего не делать.

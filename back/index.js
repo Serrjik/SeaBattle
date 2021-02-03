@@ -60,9 +60,11 @@ const port = 80
 const sessionMiddleware = session({
 	secret: 's3Cur3',
 	name: 'sessionId',
+	resave: false,
+	saveUninitialized: true,
 	cookie: {
 		sameSite: true,
-		secure: true,
+		// secure: true,
 	},
 })
 

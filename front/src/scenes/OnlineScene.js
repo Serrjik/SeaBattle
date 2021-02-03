@@ -85,8 +85,8 @@ class OnlineScene extends Scene {
 			Обработчик принимает массивы всех выстрелов игрока и его оппонента.
 		*/
 		socket.on('setShots', (ownShots, opponentShots) => {
-			console.log('ownShots: ', ownShots);
-			console.log('opponentShots: ', opponentShots);
+			// console.log('ownShots: ', ownShots);
+			// console.log('opponentShots: ', opponentShots);
 			
 			// Удалить все выстрелы на поле игрока.
 			player.removeAllShots()
@@ -133,7 +133,7 @@ class OnlineScene extends Scene {
 		против какого соперника будет игра, и ключ партии игры.
 	*/
 	start (variant, key = '') {
-		console.log('variant:', variant, 'key: ', key);
+		// console.log('variant:', variant, 'key: ', key);
 		// Соединение с сервером (пользователь), игрок.
 		const { socket, player } = this.app
 
