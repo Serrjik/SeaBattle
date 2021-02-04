@@ -11,21 +11,24 @@ const PartyManager = require('./src/PartyManager')
 // Менеджер партий.
 const pm = new PartyManager()
 
-// Создание приложения ExpressJS. Integrating Socket.IO
+// Создание приложения ExpressJS.
 const app = express()
 /*
 	Зависимость http уже есть внутри Node.js. Если запрос НЕ socket,
 	http передаёт его в app, если socket-запрос, http передаёт его io.
+	http прослушивает приложение app.
 */
 const http = require('http').Server(app);
 
 /*
-	Регистрация Socket приложения.
+	Регистрация Socket приложения. Integrating Socket.IO
 	Сервер socket.io (постоянное общение бэка и фронта).
 	Порт для общения с сокетом поднимется отдельным внутренним портом.
 	Socket-сервер создаётся на базе http-сервера,
-	который уже прослушивает события приложения.
-	Здесь примешали отдачу файла "./socket.io/socket.io.js" (частный случай).
+	который уже прослушивает события приложения app.
+	io-соединение прослушивает http-сервер.
+	io-соединение примешивает свой static:
+	отдачу файла "./socket.io/socket.io.js".
 */
 const io = require('socket.io')(http)
 /*
@@ -33,24 +36,6 @@ const io = require('socket.io')(http)
 	работающий под управлением linux-системы) можно использовать порт 3000.
 */
 const port = 80
-
-// // need cookieParser middleware before we can do anything with cookies
-// app.use(cookieParser())
-
-// // set a cookie
-// app.use(function (req, res, next) {
-// 	// check if client sent cookie
-// 	let cookie = req.cookies.cookieName;
-// 	if (cookie === undefined) {
-// 	  // no: set a new cookie
-// 	  res.cookie('sessionId','cookieValue', { SameSite: 'Strict', signed: true })
-// 	  console.log('cookie created successfully');
-// 	} else {
-// 	  // yes, cookie was already present 
-// 	  console.log('cookie exists', cookie);
-// 	} 
-// 	next(); // <-- important!
-//   })
 
 // Настройка сессий.
 /*
