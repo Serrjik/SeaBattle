@@ -185,9 +185,9 @@ class OnlineScene extends Scene {
 			.querySelectorAll('.app-actions')
 			.forEach(element => element.classList.add('hidden'))
 
-		// Блок подготовки к игре.
+		// Блок кнопок онлайн-игры.
 		const sceneActionsBar = document.querySelector('[data-scene="online"]')
-		// Показать блок подготовки к игре.
+		// Показать блок кнопок онлайн-игры.
 		sceneActionsBar.classList.remove('hidden')
 
 		// Кнопка "Сдаться".

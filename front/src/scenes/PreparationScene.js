@@ -70,7 +70,8 @@ class PreparationScene extends Scene {
 		// Кнопка начала игры против случайного игрока.
 		const randomButton = document.querySelector('[data-type="random"]')
 		// Кнопка "Вызвать на бой".
-		const challengeButton = document.querySelector('[data-type="challenge"]')
+		const challengeButton =
+			document.querySelector('[data-type="challenge"]')
 		// Кнопка "Принять вызов".
 		const takeChallengeButton =
 			document.querySelector('[data-type="takeChallenge"]')
