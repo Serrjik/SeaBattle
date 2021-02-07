@@ -419,7 +419,7 @@ module.exports = class PartyManager {
 	removePlayer (player) {
 		// Если переданного игрока нет в массиве всех игроков:
 		if (!this.players.includes(player)) {
-			// Не добавляем этого игрока в массив всех игроков.
+			// Не удаляем этого игрока из массива всех игроков.
 			return false
 		}
 
@@ -479,7 +479,7 @@ module.exports = class PartyManager {
 	removeParty (party) {
 		// Если переданной партии нет в массиве всех партий:
 		if (!this.parties.includes(party)) {
-			// Не добавляем эту партию в массив всех партий.
+			// Не удаляем эту партию из массива всех партий.
 			return false
 		}
 
