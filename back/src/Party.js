@@ -156,23 +156,20 @@ module.exports = class Party extends Observer {
 			// Сообщить о наступлении конца партии игры.
 			this.stop()
 
-			// Если проиграл первый игрок:
-			if (player1.battlefield.loser) {
-				/*
-					Оба игрока генерируют событие смены статуса
-					состояния игры и каждый передаёт свой статус
-					"Проиграл" или "Победил".
-				*/
-				player1.emit(
-					'statusChange',
-					player1.battlefield.loser ? 'loser' : 'winner'
-				)
+			/*
+				Оба игрока генерируют событие смены статуса
+				состояния игры и каждый передаёт свой статус
+				"Проиграл" или "Победил".
+			*/
+			player1.emit(
+				'statusChange',
+				player1.battlefield.loser ? 'loser' : 'winner'
+			)
 
-				player2.emit(
-					'statusChange',
-					player2.battlefield.loser ? 'loser' : 'winner'
-				)
-			}
+			player2.emit(
+				'statusChange',
+				player2.battlefield.loser ? 'loser' : 'winner'
+			)
 		}
 	}
 
