@@ -255,6 +255,7 @@ module.exports = class PartyManager {
 					нажимать кнопку "Сдаться", если он ввёл невалидный ключ
 					партии.
 				*/
+				socket.emit('inTheMiddleOfNowhere')
 			}
 		})
 

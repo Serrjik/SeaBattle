@@ -87,7 +87,7 @@ class OnlineScene extends Scene {
 		socket.on('setShots', (ownShots, opponentShots) => {
 			// console.log('ownShots: ', ownShots);
 			// console.log('opponentShots: ', opponentShots);
-			
+
 			// Удалить все выстрелы на поле игрока.
 			player.removeAllShots()
 
@@ -122,6 +122,14 @@ class OnlineScene extends Scene {
 				'Первый кто пройдёт по этой ссылке будет играть с вами:\n' +
 				`${location.href}`
 			)
+		})
+
+		// Повесить на соединение обработчик события нахождения непонятно где.
+		socket.on('inTheMiddleOfNowhere', () => {
+			console.log('inTheMiddleOfNowhere')
+
+			// Запустить сцену подготовки к игре.
+			this.app.start('preparation')
 		})
 
 		// Отобразить статус игры.
@@ -269,6 +277,7 @@ class OnlineScene extends Scene {
 
 	// Метод отображает статус партии игры.
 	statusUpdate () {
+		console.log(this.status)
 		// Блок для статуса партии игры.
 		const statusDiv = this.actionsBar.querySelector('.battlefield-status')
 
