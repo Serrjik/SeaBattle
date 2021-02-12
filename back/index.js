@@ -1,7 +1,6 @@
 // Зависимости.
 const session = require('express-session')
 const express = require('express')
-// const cookieParser = require('cookie-parser')
 // Встроенная библиотека для работы с файлами.
 const fs = require('fs')
 // Встроенная библиотека для работы с путями.
@@ -18,7 +17,7 @@ const app = express()
 	http передаёт его в app, если socket-запрос, http передаёт его io.
 	http прослушивает приложение app.
 */
-const http = require('http').Server(app);
+const http = require('http').createServer(app)
 
 /*
 	Регистрация Socket приложения. Integrating Socket.IO
@@ -49,7 +48,6 @@ const sessionMiddleware = session({
 	saveUninitialized: true,
 	cookie: {
 		sameSite: true,
-		// secure: true,
 	},
 })
 
@@ -81,7 +79,6 @@ app.use(sessionMiddleware)
 	при любом запросе к сайту.
 	express.static() создаёт обработчик - сервер, который возвращает
 	статические файлы, те файлы, что лежат в папке front.
-
 */
 app.use(express.static('./../front/'))
 

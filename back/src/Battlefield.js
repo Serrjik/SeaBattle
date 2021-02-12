@@ -40,7 +40,7 @@ module.exports = class Battlefield {
 			return this._private_matrix
 		}
 
-		// Если изменений в матрице игрового поля есть:
+		// Если изменения в матрице игрового поля есть:
 		// Создать новую матрицу игрового поля.
 		const matrix = []
 
