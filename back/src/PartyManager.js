@@ -101,7 +101,7 @@ module.exports = class PartyManager {
 			// Игроки, ожидающие вызванного игрока на бой.
 			const values = Array.from(this.waitingChallenge.values())
 
-			// Если игрок НЕ ждёт вызванного игрока на бой:
+			// Если игрок ждёт вызванного игрока на бой:
 			if (values.includes(player)) {
 				// Игрок занят.
 				return false
@@ -123,7 +123,7 @@ module.exports = class PartyManager {
 		*/
 		socket.on('shipSet', ships => {
 			// Если игрок НЕ свободен (уже в партии игры или ждёт игру):
-			if (!isFree) {
+			if (!isFree()) {
 				// Ничего не делать.
 				return
 			}
@@ -148,7 +148,7 @@ module.exports = class PartyManager {
 		*/
 		socket.on('findRandomOpponent', () => {
 			// Если игрок НЕ свободен (уже в партии игры или ждёт игру):
-			if (!isFree) {
+			if (!isFree()) {
 				// Ничего не делать.
 				return
 			}
@@ -195,7 +195,7 @@ module.exports = class PartyManager {
 		*/
 		socket.on('challengeOpponent', () => {
 			// Если игрок НЕ свободен (уже в партии игры или ждёт игру):
-			if (!isFree) {
+			if (!isFree()) {
 				// Ничего не делать.
 				return
 			}
@@ -226,7 +226,7 @@ module.exports = class PartyManager {
 		*/
 		socket.on('takeChallengeOpponent', (key = '') => {
 			// Если игрок НЕ свободен (уже в партии игры или ждёт игру):
-			if (!isFree) {
+			if (!isFree()) {
 				// Ничего не делать.
 				return
 			}
@@ -492,7 +492,7 @@ module.exports = class PartyManager {
 	}
 
 	// Метод удаляет все партии игры.
-	removeAllParties  () {
+	removeAllParties () {
 		// Копия массива всех партий игры.
 		const parties = this.parties.slice()
 
