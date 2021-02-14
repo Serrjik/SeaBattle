@@ -148,6 +148,7 @@ module.exports = class Battlefield {
 		// Присвоить матрице игрового поля значение новой матрицы.
 		this._private_matrix = matrix
 		this._private_changed = false
+
 		return this._private_matrix
 	}
 
@@ -167,7 +168,7 @@ module.exports = class Battlefield {
 		for (const ship of this.ships) {
 			// Если выбранного корабля нет на поле:
 			if (!ship.placed) {
-				// Игрок не завершил расстановку кораблей.
+				// Игрок НЕ завершил расстановку кораблей.
 				return false
 			}
 		}
@@ -185,7 +186,7 @@ module.exports = class Battlefield {
 		const isNumber = n =>
 			parseInt(n) === n && !isNaN(n) && ![Infinity, -Infinity].includes(n)
 
-		// Если хотя бы одна из координат не является числом:
+		// Если хотя бы одна из координат НЕ является числом:
 		if (!isNumber(x) || !isNumber(y)) {
 			// Координаты НЕ в пределах игрового поля.
 			return false
@@ -353,9 +354,9 @@ module.exports = class Battlefield {
 				// Ячейка игрового поля с выбранной ячейкой корабля.
 				const item = matrix[cy][cx]
 
-				// Если выбранная ячейка не ранена:
+				// Если выбранная ячейка НЕ ранена:
 				if (!item.wounded) {
-					// Корабль ещё не убит (опустить флаг).
+					// Корабль ещё НЕ убит (опустить флаг).
 					killed = false
 					break
 				}
@@ -377,20 +378,7 @@ module.exports = class Battlefield {
 						.find(shot => shot.x === cx && shot.y === cy)
 					// Установить выбранному выстрелу состояние - убийство.
 					shot.setVariant('killed')
-
-					// // Ячейка игрового поля с выбранной ячейкой корабля.
-					// const item = matrix[cy][cx]
-
-					// // Если выбранная ячейка не ранена:
-					// if (!item.wounded) {
-					// 	// Корабль ещё не убит (опустить флаг).
-					// 	killed = false
-					// 	break
-					// }
 				}
-
-				// Установить выстрелу состояние "убийство".
-				shot.setVariant('killed')
 			}
 		}
 

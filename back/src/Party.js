@@ -56,6 +56,7 @@ module.exports = class Party extends Observer {
 		// Если партия игры уже остановлена:
 		if (!this.play) {
 			// Ничего НЕ сообщать и НЕ делать.
+			return
 		}
 
 		// Партия игры НЕ должна дальше продолжаться.
