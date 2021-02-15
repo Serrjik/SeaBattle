@@ -52,8 +52,6 @@ class OnlineScene extends Scene {
 			// Вставить контейнер с новым сообщением в блок сообщений чата.
 			const chat = document.querySelector('.app-messages')
 			chat.insertBefore(div, chat.firstElementChild)
-			// Отобразить статус игры.
-			this.statusUpdate()
 		})
 
 		/*
@@ -75,9 +73,6 @@ class OnlineScene extends Scene {
 				// Добавить новый выстрел на поле текущего игрока.
 				this.app.player.addShot(shot)
 			}
-
-			// Отобразить статус игры.
-			this.statusUpdate()
 		})
 
 		/*
@@ -85,9 +80,6 @@ class OnlineScene extends Scene {
 			Обработчик принимает массивы всех выстрелов игрока и его оппонента.
 		*/
 		socket.on('setShots', (ownShots, opponentShots) => {
-			// console.log('ownShots: ', ownShots);
-			// console.log('opponentShots: ', opponentShots);
-
 			// Удалить все выстрелы на поле игрока.
 			player.removeAllShots()
 
